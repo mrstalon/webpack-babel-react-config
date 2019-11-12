@@ -1,0 +1,62 @@
+{
+  "name": "@mrstalon/webpack-babel-react-config",
+  "version": "1.0.0",
+  "description": "Webpack and babel config template for React apps",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mrstalon/webpack-babel-react-config.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mrstalon/webpack-babel-react-config/issues"
+  },
+  "homepage": "https://github.com/mrstalon/webpack-babel-react-config#readme",
+  "dependencies": {
+    "@babel/core": "^7.5.5",
+    "@babel/plugin-proposal-class-properties": "^7.5.5",
+    "@babel/preset-env": "^7.5.5",
+    "@babel/preset-react": "^7.0.0",
+    "babel-loader": "^8.0.6",
+    "copy-webpack-plugin": "^5.0.4",
+    "css-loader": "^3.2.0",
+    "html-webpack-plugin": "^3.2.0",
+    "mini-css-extract-plugin": "^0.8.0",
+    "node-sass": "^4.12.0",
+    "sass-loader": "^7.2.0",
+    "style-loader": "^1.0.0",
+    "svg-react-loader": "^0.4.6",
+    "svg-url-loader": "^3.0.0",
+    "url-loader": "^2.1.0",
+    "webpack": "^4.39.2",
+    "webpack-cli": "^3.3.6",
+    "webpack-dev-server": "^3.8.0"
+  },
+  "devDependencies": {
+    "@mrstalon/eslint-prettier-config": "github:mrstalon/eslint-prettier-config"
+  },
+  "lint-staged": {
+    "*.{js,css,scss,json,md}": [
+      "prettier --write",
+      "git add"
+    ],
+    "*.js": [
+      "eslint --fix",
+      "git add"
+    ]
+  },
+  "prettier": "@mrstalon/eslint-prettier-config/prettier",
+  "eslintConfig": {
+    "extends": "./node_modules/@mrstalon/eslint-prettier-config/eslint/index.js"
+  },
+  "eslintIgnore": [
+    "node_modules"
+  ],
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  }
+}
