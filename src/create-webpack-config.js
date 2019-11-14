@@ -4,6 +4,7 @@ const webpack = require('webpack');
 const CopyPlugin = require('copy-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const dotenv = require('dotenv');
 
 const { isDevelopment } = require('./utils');
 const { createBabelConfig } = require('./create-babel-config');
@@ -11,6 +12,10 @@ const { createBabelConfig } = require('./create-babel-config');
 const createWebpackConfig = projectDirname => {
   const fromRoot = pathTo => path.resolve(projectDirname, pathTo);
   const fromSrc = pathTo => fromRoot(`src/${pathTo}`);
+  const envVars = dotenv.config({
+    path: fromRoot('.env'),
+  });
+  const API_ROOT = envVars && envVars.parsed && envVars.parsed.API_ROOT;
 
   return {
     entry: fromSrc('index.js'),
@@ -111,15 +116,20 @@ const createWebpackConfig = projectDirname => {
         filename: isDevelopment ? '[name].css' : '[name].[hash].css',
         chunkFilename: isDevelopment ? '[id].css' : '[id].[hash].css',
       }),
+      new webpack.DefinePlugin({
+        'process.env': envVars.parsed,
+      }),
     ],
     devServer: {
       hot: true,
-      proxy: {
-        '/api': {
-          target: process.env.API_ROOT,
-          changeOrigin: true,
-        },
-      },
+      proxy: API_ROOT
+        ? {
+            '/api': {
+              target: API_ROOT,
+              changeOrigin: true,
+            },
+          }
+        : null,
       contentBase: fromRoot('dist'),
       historyApiFallback: true,
       publicPath: '/',
