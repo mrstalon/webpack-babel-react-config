@@ -98,7 +98,7 @@ const createWebpackConfig = projectDirname => {
       ],
     },
     resolve: {
-      modules: [path.join(__dirname, 'src'), 'node_modules'],
+      modules: ['node_modules/', 'src/'],
       extensions: ['.js', '.scss'],
     },
     devtool: isDevelopment ? 'cheap-module-eval-source-map' : 'source-map',
