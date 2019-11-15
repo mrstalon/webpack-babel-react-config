@@ -11,8 +11,8 @@ const { isDevelopment } = require('./utils');
 const { createBabelConfig } = require('./create-babel-config');
 
 const createWebpackConfig = projectDirname => {
-  const fromRoot = pathTo => path.resolve(projectDirname, pathTo);
-  const fromSrc = pathTo => fromRoot(`src/${pathTo}`);
+  const fromRoot = (pathTo = '') => path.resolve(projectDirname, pathTo);
+  const fromSrc = (pathTo = '') => fromRoot(`src/${pathTo}`);
   const envVars = dotenv.config({
     path: fromRoot('.env'),
   });
@@ -98,7 +98,7 @@ const createWebpackConfig = projectDirname => {
       ],
     },
     resolve: {
-      modules: ['node_modules/', 'src/'],
+      modules: [path.join(__dirname, 'src'), 'node_modules'],
       extensions: ['.js', '.scss'],
     },
     devtool: isDevelopment ? 'cheap-module-eval-source-map' : 'source-map',
