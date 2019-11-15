@@ -15,6 +15,8 @@ const createWebpackConfig = projectDirname => {
   const envVars = dotenv.config({
     path: fromRoot('.env'),
   });
+  console.log(envVars, envVars && envVars.parsed);
+
   const API_ROOT = envVars && envVars.parsed && envVars.parsed.API_ROOT;
 
   return {
