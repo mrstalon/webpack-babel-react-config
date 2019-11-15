@@ -4,7 +4,7 @@ const webpack = require('webpack');
 const CopyPlugin = require('copy-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const dotenv = require('dotenv');
+const dotenv = require('dotenv-webpack');
 
 const { isDevelopment } = require('./utils');
 const { createBabelConfig } = require('./create-babel-config');
@@ -15,8 +15,6 @@ const createWebpackConfig = projectDirname => {
   const envVars = dotenv.config({
     path: fromRoot('.env'),
   });
-  console.log(envVars, envVars && envVars.parsed);
-
   const API_ROOT = envVars && envVars.parsed && envVars.parsed.API_ROOT;
 
   return {
