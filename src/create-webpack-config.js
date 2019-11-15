@@ -4,7 +4,8 @@ const webpack = require('webpack');
 const CopyPlugin = require('copy-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const dotenv = require('dotenv-webpack');
+const DotenvWebpack = require('dotenv-webpack');
+const dotenv = require('dotenv');
 
 const { isDevelopment } = require('./utils');
 const { createBabelConfig } = require('./create-babel-config');
@@ -116,9 +117,7 @@ const createWebpackConfig = projectDirname => {
         filename: isDevelopment ? '[name].css' : '[name].[hash].css',
         chunkFilename: isDevelopment ? '[id].css' : '[id].[hash].css',
       }),
-      new webpack.DefinePlugin({
-        'process.env': envVars.parsed,
-      }),
+      new DotenvWebpack(),
     ],
     devServer: {
       hot: true,
