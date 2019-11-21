@@ -132,7 +132,7 @@ const createWebpackConfig = projectDirname => {
       contentBase: fromRoot('dist'),
       historyApiFallback: true,
       publicPath: '/',
-      quiet: true,
+      quiet: false,
       open: true,
       overlay: {
         errors: true,
