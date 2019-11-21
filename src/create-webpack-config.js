@@ -128,7 +128,7 @@ const createWebpackConfig = projectDirname => {
               changeOrigin: true,
             },
           }
-        : null,
+        : {},
       contentBase: fromRoot('dist'),
       historyApiFallback: true,
       publicPath: '/',
